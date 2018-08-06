@@ -12,4 +12,8 @@ node {
   stage('Build') {
       sh "mvn clean install"
   }
+  stage('Push the jar to nexus') {
+      nexusArtifactUploader artifacts: [[artifactId: 'java-fullstack', classifier: '', file: '$WORKSPACE/target/java-fullstack-1.0-SNAPSHOT.jar', type: 'jar']], credentialsId: 'c4d7e061-b8c4-44e5-863f-cab54f32724c', groupId: 'com.couchbase.fullstack', nexusUrl: 'http://23.100.56.131:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'sample-test', version: '1.0-SNAPSHOT'
+
+  }
 }
